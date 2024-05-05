@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :route_points
+    resources :teams
+    resources :treasures
+    resources :treasure_discoveries
+
+    root to: "teams#index"
+  end
+
   scope module: :players do
     resource :dashboard, only: :show
   end
