@@ -81,4 +81,5 @@ production:
   <<: *default
   database: rally_production
   username: rally
+  host: host.containers.internal
   password: <%= ENV["RALLY_DATABASE_PASSWORD"] %>
