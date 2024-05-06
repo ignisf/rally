@@ -54,7 +54,7 @@
             <div class="col-xl-4 offset-xl-4 mb-3 mb-lg-4">
                 <div class="card">
                     <%= image_tag next_route_point.treasure.photo, class: 'card-img' %>
-                    <div class="card-img-overlay text-white">
+                    <div class="card-img-overlay text-white treasure-hint-overlay">
                         <h5 class="card-title">Clue</h5>
                         <p>Go to location #<%= next_route_point.position.succ %> on your map. You are looking for <%= next_route_point.treasure.name %></p>
                     </div>
@@ -74,7 +74,10 @@
                     <div class="card-footer container">
                         <div class="row">
                             <div class="col">
-                                <a href="#" class="btn btn-secondary">Give up and skip</a>
+                                <%= form_with scope: :skip, url: skips_path, method: :post, data: {turbo: true, turbo_confirm: "Are you sure? This action cannot be reversed!"} do |form| %>
+                                    <%= form.hidden_field :treasure_id, value: next_route_point.treasure.id %>
+                                    <%= form.submit 'Give up and skip', class: 'btn btn-secondary' %>
+                                <% end %>
                             </div>
                             <div class="col text-end">
                                 <button type="button" class="btn btn-primary" onclick="window.location='intent://scan/#Intent;scheme=binaryeye;package=de.markusfisch.android.binaryeye;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dde.markusfisch.android.binaryeye;end'">

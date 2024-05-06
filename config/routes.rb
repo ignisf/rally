@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resource :dashboard, only: :show
     get "not-enrolled" => "enrollments#missing"
     get "enroll" => "enrollments#create"
+    resources :skips, only: :create
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
