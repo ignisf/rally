@@ -6,9 +6,13 @@
                     <div class="d-flex flex-column text-center align-items-center">
 
                         <div class="flex-grow-1 pt-4">
-                            <h5>Prosperops development</h5>
+                            <h5><%= @team.name %></h5>
                             <div class="mb-4">
-                                <span class="badge rounded-pill bg-success">In Progress</span>
+                                <% if game_still_on_for?(@team) %>
+                                    <span class="badge rounded-pill bg-success">In Progress</span>
+                                <% else %>
+                                    <span class="badge rounded-pill bg-danger">Game Over</span>
+                                <% end %>
                             </div>
                             <div class="avatar-group">
                                 <a href="#!.html" class="avatar-group-item avatar sm rounded-circle" data-tippy-placement="top" data-tippy-content="Gabriel H">
@@ -23,53 +27,64 @@
                 <div class="card-footer py-0 border-top">
                     <div class="row">
                         <div class="col text-center p-3">
-                            <h4 class="fs-5 mb-1">10</h4>
+                            <h4 class="fs-5 mb-1"><%= treasures_discovered(@team).count %></h4>
                             <span class="d-block font-size-sm">Found</span>
                         </div>
 
-                        <div class="col p-3 text-center border-end border-start">
-                            <h4 class="fs-5 mb-1">5</h4>
+                        <div class="col p-3 text-center border-start">
+                            <h4 class="fs-5 mb-1"><%= treasures_left_to_find(@team).count %></h4>
                             <span class="d-block font-size-sm">Left to find</span>
                         </div>
-
-                        <div class="col p-3 text-center">
-                            <h4 class="fs-5 mb-1">2</h4>
-                            <span class="d-block font-size-sm">Hours left</span>
-                        </div>
+                        <% if game_still_on_for?(@team) %>
+                            <div class="col p-3 text-center border-start">
+                                <h4 class="fs-5 mb-1"><%= deadline_in_words %></h4>
+                                <span class="d-block font-size-sm">Time left</span>
+                            </div>
+                        <% end %>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-xl-4 offset-xl-4 mb-3 mb-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Hint # 10</h5>
-                    meow
-                </div>
+    <% if game_still_on_for?(@team) %>
+        <% next_route_point = next_route_point_for(@team) %>
 
-                <!--Footer states-->
-                <div class="card-footer container">
-                    <div class="row">
-                        <div class="col">
-                            <a href="#" class="btn btn-secondary">Give up and skip</a>
-                        </div>
-                        <div class="col text-end">
-                            <button type="button" class="btn btn-primary" onclick="window.location='intent://scan/#Intent;scheme=binaryeye;package=de.markusfisch.android.binaryeye;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dde.markusfisch.android.binaryeye;end'">
-                                Scan QR Code
-                            </button>
+        <div class="row">
+            <div class="col-xl-4 offset-xl-4 mb-3 mb-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Hint #<%= next_route_point.position %></h5>
+                        <%= simple_format next_route_point.treasure.hint %>
+                    </div>
+
+                    <!--Footer states-->
+                    <div class="card-footer container">
+                        <div class="row">
+                            <div class="col">
+                                <a href="#" class="btn btn-secondary">Give up and skip</a>
+                            </div>
+                            <div class="col text-end">
+                                <button type="button" class="btn btn-primary" onclick="window.location='intent://scan/#Intent;scheme=binaryeye;package=de.markusfisch.android.binaryeye;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dde.markusfisch.android.binaryeye;end'">
+                                    Scan QR Code
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-xl-4 offset-xl-4 mb-3 mb-lg-4 text-center">
-            <p class="text-body-secondary"><small>Having truble scanning the QR code -- <a href="#">click here</a></small></p>
+        <div class="row">
+            <div class="col-xl-4 offset-xl-4 mb-3 mb-lg-4 text-center">
+                <p class="text-body-secondary"><small>Having truble scanning the QR code -- <a href="#">click here</a></small></p>
+            </div>
         </div>
-    </div>
+    <% else %>
+        <div class="row">
+            <div class="col-xl-4 offset-xl-4 mb-3 mb-lg-4 text-center">
+                <p class="text-body-secondary"><small>The game is over, the organisers will announce the final resluts soon.</small></p>
+            </div>
+        </div>
+    <% end %>
 </div>

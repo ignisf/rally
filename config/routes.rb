@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   scope module: :players do
     resource :dashboard, only: :show
+    get "not-enrolled" => "enrollments#missing"
+    get "enroll" => "enrollments#create"
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
