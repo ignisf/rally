@@ -10,10 +10,11 @@ class RoutePointDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     position: Field::Number,
+    state: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     team: Field::BelongsTo,
     treasure: Field::BelongsTo,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -26,6 +27,7 @@ class RoutePointDashboard < Administrate::BaseDashboard
     position
     team
     treasure
+    state
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -33,6 +35,7 @@ class RoutePointDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     position
+    state
     team
     treasure
     created_at
@@ -44,6 +47,7 @@ class RoutePointDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     position
+    state
     team
     treasure
   ].freeze

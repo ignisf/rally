@@ -12,13 +12,11 @@ class TeamDashboard < Administrate::BaseDashboard
     avatar: Field::ActiveStorage,
     code: Field::String,
     discovered_treasures: Field::HasMany,
+    skipped_treasures: Field::HasMany,
     name: Field::String,
     route_points: Field::HasMany,
-    skipped_treasures: Field::HasMany,
-    treasure_discoveries: Field::HasMany,
-    treasure_skips: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -38,12 +36,8 @@ class TeamDashboard < Administrate::BaseDashboard
     id
     avatar
     code
-    discovered_treasures
     name
     route_points
-    skipped_treasures
-    treasure_discoveries
-    treasure_skips
     created_at
     updated_at
   ].freeze
@@ -53,13 +47,7 @@ class TeamDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     avatar
-    code
-    discovered_treasures
     name
-    route_points
-    skipped_treasures
-    treasure_discoveries
-    treasure_skips
   ].freeze
 
   # COLLECTION_FILTERS

@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  namespace :admin do
+  namespace :admin, path: "super-secret-admin-69420" do
     resources :route_points
     resources :teams
     resources :treasures
-    resources :treasure_discoveries
 
     root to: "teams#index"
   end
@@ -12,7 +11,12 @@ Rails.application.routes.draw do
     resource :dashboard, only: :show
     get "not-enrolled" => "enrollments#missing"
     get "enroll" => "enrollments#create"
+
     resources :skips, only: :create
+
+    resources :treasures, only: [], param: :code do
+      resource :discovery, only: [:new, :create]
+    end
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -22,5 +26,5 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", :as => :rails_health_check
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "players/dashboards#show"
 end

@@ -38,5 +38,7 @@ module Rally
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.action_view.field_error_proc = proc { |html_tag, _| html_tag }
   end
 end

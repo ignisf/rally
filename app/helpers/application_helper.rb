@@ -2,7 +2,7 @@ module ApplicationHelper
   DEADLINE = 56.minutes.from_now
 
   def next_route_point_for(team)
-    team.route_points.where(treasure: treasures_left_to_find(team)).order(position: :asc).first
+    team.route_points_left_to_discover.order(position: :asc).first
   end
 
   def treasures_discovered(team)
@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def treasures_left_to_find(team)
-    Treasure.where.not(id: team.discovered_treasures + team.skipped_treasures)
+    team.treasures_left_to_discover
   end
 
   def game_still_on?

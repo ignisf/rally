@@ -13,10 +13,10 @@ class TreasureDashboard < Administrate::BaseDashboard
     code: Field::String,
     hint: Field::Text,
     photo: Field::ActiveStorage,
-    name: Field::Text,
+    name: Field::Text.with_options(searchable: true),
     question: Field::Text,
     route_points: Field::HasMany,
-    treasure_discoveries: Field::HasMany,
+    discovered_by_teams: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -29,7 +29,7 @@ class TreasureDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     photo
     name
-    treasure_discoveries
+    discovered_by_teams
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -41,8 +41,7 @@ class TreasureDashboard < Administrate::BaseDashboard
     hint
     question
     answer
-    route_points
-    treasure_discoveries
+    discovered_by_teams
     created_at
     updated_at
   ].freeze
@@ -56,8 +55,6 @@ class TreasureDashboard < Administrate::BaseDashboard
     hint
     question
     answer
-    route_points
-    treasure_discoveries
   ].freeze
 
   # COLLECTION_FILTERS

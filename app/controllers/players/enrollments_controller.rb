@@ -4,7 +4,7 @@ class Players::EnrollmentsController < ApplicationController
 
     cookies.signed[:my_team] = {value: @team.id, expires: 365.days}
 
-    redirect_to dashboard_path # , notice: "You are now part of #{@team.name}!"
+    redirect_to root_path # , notice: "You are now part of #{@team.name}!"
   end
 
   def missing
