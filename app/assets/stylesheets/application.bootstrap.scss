@@ -42,3 +42,12 @@ body {
     --bs-bg-opacity: 1;
     background-color: #FF7F50 !important;
 }
+
+.treasure-hint {
+    hyphens: auto;
+    text-align: justify;
+}
+
+.treasure-hint-overlay {
+    background: linear-gradient(180deg, rgba(112,66,20,0.42619054457720584) 0%, rgba(112,66,20,0) 30%, rgba(112,66,20,0) 100%);
+}

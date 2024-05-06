@@ -1,6 +1,6 @@
 class Players::DashboardsController < ApplicationController
   def show
-    @team = Team.find(session[:my_team_id])
+    @team = Team.find(cookies.signed[:my_team])
   rescue ActiveRecord::RecordNotFound
     redirect_to not_enrolled_path
   end

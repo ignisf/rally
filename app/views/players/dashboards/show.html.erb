@@ -15,9 +15,9 @@
                                 <% end %>
                             </div>
                             <div class="avatar-group">
-                                <a href="#!.html" class="avatar-group-item avatar sm rounded-circle" data-tippy-placement="top" data-tippy-content="Gabriel H">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="..." class="avatar-group-img rounded-circle" />
-                                </a>
+                                <div class="avatar-group-item avatar sm rounded-circle">
+                                    <%= image_tag @team.avatar.representation(resize_to_limit: [315, 315]), class: ['avatar-group-img', 'rounded-circle'] %>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -53,8 +53,20 @@
         <div class="row">
             <div class="col-xl-4 offset-xl-4 mb-3 mb-lg-4">
                 <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Hint #<%= next_route_point.position %></h5>
+                    <%= image_tag next_route_point.treasure.photo, class: 'card-img' %>
+                    <div class="card-img-overlay text-white">
+                        <h5 class="card-title">Clue</h5>
+                        <p>Go to location #<%= next_route_point.position.succ %> on your map. You are looking for <%= next_route_point.treasure.name %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-4 offset-xl-4 mb-3 mb-lg-4">
+                <div class="card">
+                    <div class="card-body treasure-hint">
+                        <h5 class="card-title"><%= next_route_point.treasure.name %></h5>
+
                         <%= simple_format next_route_point.treasure.hint %>
                     </div>
 
