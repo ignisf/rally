@@ -12,6 +12,8 @@ class TreasureDashboard < Administrate::BaseDashboard
     answer: Field::Text,
     code: Field::String,
     hint: Field::Text,
+    photo: Field::ActiveStorage,
+    name: Field::Text,
     question: Field::Text,
     route_points: Field::HasMany,
     treasure_discoveries: Field::HasMany,
@@ -25,20 +27,20 @@ class TreasureDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    id
-    answer
-    code
-    hint
+    photo
+    name
+    treasure_discoveries
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    answer
-    code
+    name
+    photo
     hint
     question
+    answer
     route_points
     treasure_discoveries
     created_at
@@ -49,10 +51,11 @@ class TreasureDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    answer
-    code
+    photo
+    name
     hint
     question
+    answer
     route_points
     treasure_discoveries
   ].freeze
