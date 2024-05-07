@@ -1,5 +1,5 @@
 class Players::DiscoveriesController < ApplicationController
-  before_action :assign_team, :assign_treasure
+  before_action :ensure_game_is_still_on, :assign_team, :assign_treasure, :ensure_treasure_is_next
 
   def new
     @treasure_discovery = DiscoveryForm.new(treasure: @treasure)
@@ -17,6 +17,14 @@ class Players::DiscoveriesController < ApplicationController
   end
 
   private
+
+  def ensure_game_is_still_on
+    redirect_to root_path unless Rails.application.config.deadline.future?
+  end
+
+  def ensure_treasure_is_next
+    redirect_to root_path unless @treasure == @team.next_treasure
+  end
 
   def discovery_form_params
     params.require(:discovery_form).permit(:answer)

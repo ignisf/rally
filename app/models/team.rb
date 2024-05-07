@@ -17,4 +17,8 @@ class Team < ApplicationRecord
   # has_many :route_points_left_to_visit, -> { order(position: :asc) }, through: :treasures_left_to_discover, class_name: "RoutePoint", source: :route_points
 
   has_one_attached :avatar
+
+  def next_treasure
+    route_points_left_to_discover.includes(:treasure).order(position: :asc).first.treasure
+  end
 end

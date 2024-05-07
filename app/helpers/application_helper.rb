@@ -1,6 +1,4 @@
 module ApplicationHelper
-  DEADLINE = 56.minutes.from_now
-
   def next_route_point_for(team)
     team.route_points_left_to_discover.order(position: :asc).first
   end
@@ -14,7 +12,7 @@ module ApplicationHelper
   end
 
   def game_still_on?
-    DEADLINE.future?
+    Rails.application.config.deadline.future?
   end
 
   def game_still_on_for?(team)
@@ -22,9 +20,9 @@ module ApplicationHelper
   end
 
   def deadline_in_words
-    time_left = ActiveSupport::Duration.build(DEADLINE - Time.current).parts
+    time_left = ActiveSupport::Duration.build(Rails.application.config.deadline - Time.current).parts
 
-    if 1.day.from_now > DEADLINE
+    if 1.day.from_now > Rails.application.config.deadline
       "#{time_left[:hours].to_i.to_s.rjust(2, "0")}:#{time_left[:minutes].to_i.to_s.rjust(2, "0")}"
     else
       "> 1 day"
