@@ -10,7 +10,6 @@ class Players::DiscoveriesController < ApplicationController
 
     if @treasure_discovery.valid?
       @team.route_points.find_by!(treasure: @treasure).update!(state: :discovered, discovered_at: Time.current)
-      ActionCable.server.broadcast("team_#{@team.id}", {reload: "new_discovery"})
       redirect_to root_path
     else
       render :new, status: :unprocessable_entity
