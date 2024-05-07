@@ -52,8 +52,8 @@
 
         <div class="row">
             <div class="col-xl-4 offset-xl-4 mb-3 mb-lg-4">
-                <div class="card">
-                    <%= image_tag next_route_point.treasure.photo, class: 'card-img', data: {'turbo-temporary': true} %>
+              <div class="card">
+                <%= image_tag next_route_point.treasure.photo.variant(resize_to_limit: [1080, 1920], format: :jpeg, saver: { subsample_mode: "on", strip: true, interlace: true, quality: 80 }), width: 1080, height: 1920, class: 'card-img tall-image', data: {'turbo-temporary': true} %>
                     <div class="card-img-overlay text-white treasure-hint-overlay">
                         <h5 class="card-title">Clue</h5>
                         <p>Go to location #<%= next_route_point.position.succ %> on your map. You are looking for <%= next_route_point.treasure.name %></p>
