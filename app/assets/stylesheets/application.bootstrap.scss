@@ -51,3 +51,23 @@ body {
 .treasure-hint-overlay {
     background: linear-gradient(180deg, rgba(112,66,20,0.42619054457720584) 0%, rgba(112,66,20,0) 30%, rgba(112,66,20,0) 100%);
 }
+
+#html5-qrcode-button-camera-permission, #html5-qrcode-button-camera-start {
+    @extend .btn;
+    @extend .btn-primary;
+}
+
+#html5-qrcode-button-camera-stop {
+    @extend .btn;
+    @extend .btn-secondary;
+}
+
+#html5-qrcode-select-camera {
+    @extend .form-select;
+    @extend .mt-3;
+    @extend .mb-3;
+}
+
+#qrReaderBody {
+    border: 0px !important;
+}

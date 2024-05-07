@@ -6,3 +6,9 @@ import { application } from "./application";
 
 import QrController from "./qr_controller";
 application.register("qr", QrController);
+
+import QrReaderController from "./qr_reader_controller";
+application.register("qr-reader", QrReaderController);
+
+import QrScanButtonController from "./qr_scan_button_controller";
+application.register("qr-scan-button", QrScanButtonController);

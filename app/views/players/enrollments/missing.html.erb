@@ -1,25 +1,38 @@
 <div class="container">
-    <div class="row">
-        <div class="col-xl-4 offset-xl-4 mb-3 mb-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Your device has not been associated with a team</h5>
-                    <p>Please scan the QR code at the top right corner of your map in order to be able to play the game from this device.</p>
-                </div>
-
-                <!--Footer states-->
-                <div class="card-footer container text-center">
-                    <button type="button" class="btn btn-primary" onclick="window.location='intent://scan/#Intent;scheme=binaryeye;package=de.markusfisch.android.binaryeye;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dde.markusfisch.android.binaryeye;end'">
-                        Scan QR Code
-                    </button>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-xl-4 offset-xl-4 mb-3 mb-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Your device has not been associated with a team</h5>
+          <p>Please scan the QR code at the top right corner of your map in order to be able to play the game from this device.</p>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-xl-4 offset-xl-4 mb-3 mb-lg-4 text-center">
-            <p class="text-body-secondary"><small>Having truble scanning the QR code -- <a href="#">click here</a></small></p>
+        <!--Footer states-->
+        <div class="card-footer container text-center">
+          <button type="button" class="btn btn-primary" data-controller="qr-scan-button" data-action="click->qr-scan-button#click">
+            Scan QR Code
+          </button>
         </div>
+      </div>
     </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-4 offset-xl-4 mb-3 mb-lg-4 text-center">
+      <p class="text-body-secondary"><small>Having truble scanning the QR code -- <a href="#">click here</a></small></p>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" aria-hidden="true" data-controller="qr-reader" data-action="qr-scan-button:scan@window->qr-reader#start">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-action="click->qr-reader#dismiss" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="qrReaderBody" data-qr-reader-target="body"></div>
+      </div>
+    </div>
+  </div>
 </div>
