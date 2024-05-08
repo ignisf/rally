@@ -2,13 +2,16 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application";
+import { application } from "./application"
 
-import QrController from "./qr_controller";
-application.register("qr", QrController);
+import ConfettiController from "./confetti_controller"
+application.register("confetti", ConfettiController)
 
-import QrReaderController from "./qr_reader_controller";
-application.register("qr-reader", QrReaderController);
+import QrController from "./qr_controller"
+application.register("qr", QrController)
 
-import QrScanButtonController from "./qr_scan_button_controller";
-application.register("qr-scan-button", QrScanButtonController);
+import QrReaderController from "./qr_reader_controller"
+application.register("qr-reader", QrReaderController)
+
+import QrScanButtonController from "./qr_scan_button_controller"
+application.register("qr-scan-button", QrScanButtonController)

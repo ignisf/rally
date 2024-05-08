@@ -29,7 +29,7 @@
                 <div class="card-footer py-0 border-top">
                     <div class="row">
                         <div class="col text-center p-3">
-                            <h4 class="fs-5 mb-1"><%= treasures_discovered(@team).count %></h4>
+                            <h4 class="fs-5 mb-1" data-controller="confetti" data-action="turbo:load@document->confetti#change"><%= treasures_discovered(@team).count %></h4>
                             <span class="d-block font-size-sm">Found</span>
                         </div>
 
