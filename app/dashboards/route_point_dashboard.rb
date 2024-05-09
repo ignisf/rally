@@ -11,8 +11,9 @@ class RoutePointDashboard < Administrate::BaseDashboard
     id: Field::Number,
     position: Field::Number,
     state: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    team: Field::BelongsTo,
-    treasure: Field::BelongsTo,
+    team: Field::BelongsTo.with_options(order: :id),
+    treasure: Field::BelongsTo.with_options(order: :id),
+    discovered_at: Field::DateTime,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -28,6 +29,7 @@ class RoutePointDashboard < Administrate::BaseDashboard
     team
     treasure
     state
+    discovered_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -38,6 +40,7 @@ class RoutePointDashboard < Administrate::BaseDashboard
     state
     team
     treasure
+    discovered_at
     created_at
     updated_at
   ].freeze
@@ -50,6 +53,7 @@ class RoutePointDashboard < Administrate::BaseDashboard
     state
     team
     treasure
+    discovered_at
   ].freeze
 
   # COLLECTION_FILTERS

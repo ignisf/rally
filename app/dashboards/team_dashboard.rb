@@ -11,10 +11,10 @@ class TeamDashboard < Administrate::BaseDashboard
     id: Field::Number,
     avatar: Field::ActiveStorage,
     code: Field::String,
-    discovered_treasures: Field::HasMany,
-    skipped_treasures: Field::HasMany,
+    discovered_treasures: Field::HasMany.with_options(sort_by: {route_points: :discovered_at}),
+    skipped_treasures: Field::HasMany.with_options(sort_by: {route_points: :updated_at}),
     name: Field::String,
-    route_points: Field::HasMany,
+    route_points: Field::HasMany.with_options(sort_by: :position),
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -33,10 +33,9 @@ class TeamDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    id
-    avatar
-    code
     name
+    code
+    avatar
     route_points
     created_at
     updated_at
@@ -68,4 +67,8 @@ class TeamDashboard < Administrate::BaseDashboard
   # def display_resource(team)
   #   "Team ##{team.id}"
   # end
+
+  def display_resource(team)
+    "Team #{team.name}"
+  end
 end

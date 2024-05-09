@@ -35,8 +35,8 @@ class TreasureDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    id
     name
+    code
     photo
     hint
     question
@@ -75,4 +75,8 @@ class TreasureDashboard < Administrate::BaseDashboard
   # def display_resource(treasure)
   #   "Treasure ##{treasure.id}"
   # end
+
+  def display_resource(treasure)
+    "#{treasure.name} (#{treasure.id})"
+  end
 end
