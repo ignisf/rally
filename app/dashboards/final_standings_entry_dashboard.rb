@@ -13,7 +13,7 @@ class FinalStandingsEntryDashboard < Administrate::BaseDashboard
     first_treasure_discovered_at: Field::String.with_options(searchable: false),
     last_treasure_discovered_at: Field::String.with_options(searchable: false),
     team: Field::BelongsTo,
-    treasure_hunt_time: Field::String.with_options(searchable: false),
+    treasure_hunt_time: ::DurationField,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
