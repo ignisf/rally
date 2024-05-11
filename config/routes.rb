@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   namespace :admin, path: "super-secret-admin-69420" do
-    resources :route_points
+    resources :final_standings_entries, only: :index
     resources :teams
     resources :treasures
+    resources :route_points
 
-    root to: "teams#index"
+    root to: "final_standings_entries#index"
   end
 
   scope module: :players do

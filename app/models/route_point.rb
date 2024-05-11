@@ -7,4 +7,5 @@ class RoutePoint < ApplicationRecord
   validates :discovered_at, presence: true, if: -> { state == :discovered }
 
   broadcasts_refreshes_to :team
+  broadcasts_refreshes_to ->(_) { [:final_standings] }
 end

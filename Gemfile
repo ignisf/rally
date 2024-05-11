@@ -69,3 +69,5 @@ end
 
 gem "administrate"
 gem "administrate-field-active_storage"
+
+gem "scenic", "~> 1.8"

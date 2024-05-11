@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_06_212608) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_11_094645) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -81,4 +81,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_06_212608) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "route_points", "teams"
   add_foreign_key "route_points", "treasures"
+
+  create_view "final_standings_entries", sql_definition: <<-SQL
+      WITH classification_entries AS (
+           SELECT teams.id AS team_id,
+              count(discovered_route_points.id) AS discovered_treasures,
+              max(discovered_route_points.discovered_at) AS last_treasure_discovered_at
+             FROM (teams
+               LEFT JOIN route_points discovered_route_points ON (((teams.id = discovered_route_points.team_id) AND (discovered_route_points.state = 3))))
+            GROUP BY teams.id
+          )
+   SELECT row_number() OVER (ORDER BY classification_entries.discovered_treasures DESC, classification_entries.last_treasure_discovered_at, classification_entries.team_id) AS id,
+      classification_entries.team_id,
+      classification_entries.discovered_treasures,
+      classification_entries.last_treasure_discovered_at
+     FROM classification_entries;
+  SQL
 end

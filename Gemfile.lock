@@ -272,6 +272,9 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    scenic (1.8.0)
+      activerecord (>= 4.0.0)
+      railties (>= 4.0.0)
     selectize-rails (0.12.6)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
@@ -336,6 +339,7 @@ DEPENDENCIES
   redis (>= 4.0.1)
   rubocop-rails
   rubocop-rspec
+  scenic (~> 1.8)
   sprockets-rails
   standard
   stimulus-rails
