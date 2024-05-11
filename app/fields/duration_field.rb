@@ -5,7 +5,7 @@ class DurationField < Administrate::Field::Base
     if data
       data.inspect
     else
-      'N/A'
+      "N/A"
     end
   end
 end

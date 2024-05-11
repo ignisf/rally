@@ -1,0 +1,19 @@
+<p class="text-body-secondary text-center"><small>Having truble scanning the QR code -- <%= link_to 'click here', '#', data: { 'bs-toggle': "modal", 'bs-target': "#qr-help-modal"} %></small></p>
+
+<div class="modal fade" tabindex="-1" aria-hidden="true" id="qr-help-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        Scanning QR Codes
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you having some trouble scanning QR codes with our provided QR code scanner?</p>
+        <p>You can try an alternative one, like <%= link_to "Binary Eye for Android", "https://play.google.com/store/apps/details?id=de.markusfisch.android.binaryeye&hl=en&gl=US" %>, or the default Camera app on Apple devices. Just scan the QR code and open the link.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
