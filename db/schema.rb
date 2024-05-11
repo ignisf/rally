@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_11_094645) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_11_113713) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -86,14 +86,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_11_094645) do
       WITH classification_entries AS (
            SELECT teams.id AS team_id,
               count(discovered_route_points.id) AS discovered_treasures,
+              (max(discovered_route_points.discovered_at) - min(discovered_route_points.discovered_at)) AS treasure_hunt_time,
+              min(discovered_route_points.discovered_at) AS first_treasure_discovered_at,
               max(discovered_route_points.discovered_at) AS last_treasure_discovered_at
              FROM (teams
                LEFT JOIN route_points discovered_route_points ON (((teams.id = discovered_route_points.team_id) AND (discovered_route_points.state = 3))))
             GROUP BY teams.id
           )
-   SELECT row_number() OVER (ORDER BY classification_entries.discovered_treasures DESC, classification_entries.last_treasure_discovered_at, classification_entries.team_id) AS id,
+   SELECT row_number() OVER (ORDER BY classification_entries.discovered_treasures DESC, classification_entries.treasure_hunt_time, classification_entries.team_id) AS place,
       classification_entries.team_id,
       classification_entries.discovered_treasures,
+      classification_entries.treasure_hunt_time,
+      classification_entries.first_treasure_discovered_at,
       classification_entries.last_treasure_discovered_at
      FROM classification_entries;
   SQL

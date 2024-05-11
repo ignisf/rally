@@ -1,4 +1,4 @@
 class FinalStandingsEntry < ApplicationRecord
-  self.primary_key = :id
+  self.primary_key = :place
   belongs_to :team
 end
