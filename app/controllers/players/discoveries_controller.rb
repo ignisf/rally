@@ -31,7 +31,7 @@ class Players::DiscoveriesController < ApplicationController
   end
 
   def assign_treasure
-    @treasure = helpers.treasures_left_to_find(@team).find_by(code: params[:treasure_code])
+    @treasure = helpers.treasures_left_to_find(@team).find_by!(code: params[:treasure_code])
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path
   end
