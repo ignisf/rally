@@ -20,6 +20,7 @@ class FinalStandingsEntryDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
+    id
     team
     discovered_treasures
     last_treasure_discovered_at
