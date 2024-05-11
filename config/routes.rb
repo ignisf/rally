@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resource :dashboard, only: :show
     get "not-enrolled" => "enrollments#missing"
     get "enroll" => "enrollments#create"
+    resources :rules, only: :index
 
     resources :skips, only: :create
 

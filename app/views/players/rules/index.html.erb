@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xl-4 offset-xl-4 mb-3 mb-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex flex-column text-center align-items-center">
+
+            <div class="flex-grow-1 pt-4">
+              <h5>Team <%= @team.name %></h5>
+              <div class="mb-4">
+                <% if game_still_on_for?(@team) %>
+                  <span class="badge rounded-pill bg-success">In Progress</span>
+                <% else %>
+                  <span class="badge rounded-pill bg-danger">Game Over</span>
+                <% end %>
+              </div>
+              <div class="avatar-group">
+                <div class="avatar-group-item avatar sm rounded-circle">
+                  <%= image_tag @team.avatar.representation(resize_to_limit: [315, 315]), class: ['avatar-group-img', 'rounded-circle'] %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Footer states-->
+        <div class="card-footer py-0 border-top">
+          <div class="row">
+            <div class="col text-center p-3">
+              <h4 class="fs-5 mb-1" data-controller="confetti" data-action="turbo:load@document->confetti#change"><%= treasures_discovered(@team).count %></h4>
+              <span class="d-block font-size-sm">Found</span>
+            </div>
+
+            <div class="col p-3 text-center border-start">
+              <h4 class="fs-5 mb-1"><%= treasures_left_to_find(@team).count %></h4>
+              <span class="d-block font-size-sm">Left to find</span>
+            </div>
+            <% if game_still_on_for?(@team) %>
+              <div class="col p-3 text-center border-start">
+                <h4 class="fs-5 mb-1"><%= deadline_in_words %></h4>
+                <span class="d-block font-size-sm">Time left</span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-4 offset-xl-4 mb-3 mb-lg-4">
+      <div class="card">
+        <div class="card-body treasure-hint">
+          <h4 class="card-title">Welcome to team <%= @team.name %>!</h4>
+
+          <h5 class="card-title">You will embark on a classic treasure hunt in the center of Sofia</h5>
+          <p>You are divided into ten teams. You can find a list of participants and their respectful teams here and on your emails.
+            It is your job to find your team mates and connect – networking time!</p>
+          <p>Once we see the teams form and you are ready to start, each team will receive a paper map of the city with clues
+            and a route to follow. Every team has its own course which is independent from the other teams’.</p>
+          <p>On the map you receive, there will be a QR code which is unique for every team. It is a login for the team to start
+          playing the game. Once you scan the QR code, you will be prompted with the location you have to visit to start the
+          game. Every team starts from a different location, but we all come together at one place in the end where we will
+            be waiting for you with refreshments!</p>
+          <p>Once you get to the first location, you will have to find a QR code which is hidden in plain sight somewhere in the
+          vicinity. When you scan the code on your first location, your clock starts ticking! Your task is to go through
+          your course as fast as possible! It doesn’t matter if one team starts earlier from the other. What matters is,
+          you finish your course in the shortest amount of time! Read the information about every location carefully!
+          When you find a QR code and scan it, you will be asked a question. Answering the question correctly unlocks the
+          clue to the next location you need to visit. You can answer multiple times until you have the correct response. In
+          case you can’t find the QR code, you have the option to give up and skip a QR code. Once you skip a QR code
+          though, you can’t go back and try again so do this only as a last resort. Skipping a code lets you continue the
+          course but it will reflect negatively on your end result. The team with the most QR codes collected in the shortest
+            amount of time wins!</p>
+          <%= image_tag 'instructions.png', alt: 'Illustration', class: 'img-fluid' %>
+        </div>
+
+        <!--Footer states-->
+        <div class="card-footer container">
+          <div class="row">
+            <div class="col text-center">
+              <%= link_to 'Start game!', root_path, class: 'btn btn-lg btn-primary' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
