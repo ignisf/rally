@@ -41,6 +41,6 @@ module Rally
 
     config.action_view.field_error_proc = proc { |html_tag, _| html_tag }
 
-    config.deadline = Time.new(2024, 5, 13, 18, 0, 0, "+03:00")
+    config.deadline = Time.new(2024, 5, 13, 20, 0, 0, "+03:00")
   end
 end
